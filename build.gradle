@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility='8'
 
 java {
-	sourceCompatibility = '11'
+	sourceCompatibility = '8'
 }
 
 configurations {
