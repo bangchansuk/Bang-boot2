@@ -20,8 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest//스프링부트에 Junit5=주피터가 포함되어서 구현된다.
 class HelloControllerTests {
 
-	@Autowired
-	private HelloComtroller helloComtroller;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -59,7 +57,6 @@ class HelloControllerTests {
 	
 	@Test
 	void hello()throws Exception {
-		helloComtroller.hello();
 		
 		mockMvc.perform(
 					get("/")
