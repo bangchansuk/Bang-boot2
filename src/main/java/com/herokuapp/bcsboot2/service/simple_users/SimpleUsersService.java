@@ -17,7 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor//final 매개변수가 있는 생성자메소드가 자동 생성된다
+@RequiredArgsConstructor//final 매개변수가 있는 생성자메소드가 자동 생성된다..zz
 @Service//서비스 객체로 만든다
 public class SimpleUsersService {
 	//final로 DB 핸들링한 객체 생성
