@@ -1,4 +1,4 @@
-package com.herokuapp.bcsboot2.service;
+package com.herokuapp.bcsboot2.service.posts;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
