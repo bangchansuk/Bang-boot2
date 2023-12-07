@@ -20,7 +20,7 @@ $(document).ready(function() {
                 Looged in as : <span id="user">{{sessionUserName}}</span>
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>
                 {{#sessionRoleName}}
-                <a href="#" class="btn btn-secondary active" role="button">
+                <a href="/simple_users/list" class="btn btn-secondary active" role="button">
                     회원관리
                 </a>
                 {{/sessionRoleName}}
@@ -43,7 +43,7 @@ $(document).ready(function() {
         </div>
     </div>
     <br>
-    <form action="/index.html" method="GET">
+    <form action="/" method="GET">
         <div class="btn-group" role="group" aria-label="Basic example">
             <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
             <button class="btn btn-secondary">검색</button>

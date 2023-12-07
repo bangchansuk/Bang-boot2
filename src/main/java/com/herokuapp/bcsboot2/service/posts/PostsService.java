@@ -1,4 +1,4 @@
-package com.herokuapp.bcsboot2.service;
+package com.herokuapp.bcsboot2.service.posts;
 
 import javax.persistence.Entity;
 import javax.transaction.Transactional;
@@ -35,6 +35,11 @@ public class PostsService {
 	@Transactional//읽기:전체게시물 Read
 	public Page<Posts> postsList(Pageable pageable) {
 		Page<Posts> postsList = postsRepository.findAll(pageable);
+		return postsList;
+	}
+	@Transactional//검색하기 오버로딩으로 매개변수를 다르게 해줌
+	public Page<Posts> postsList(String keyword,Pageable pageable) {
+		Page<Posts> postsList = postsRepository.findByTitleContaining(keyword,pageable);
 		return postsList;
 	}
 	@Transactional//수정:Update는 엔티티의 값만수정하면 레포지토리 없이 DB값도 연동된다

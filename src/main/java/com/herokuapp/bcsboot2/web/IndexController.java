@@ -10,12 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.herokuapp.bcsboot2.config.auth.LoginUser;
 import com.herokuapp.bcsboot2.config.auth.dto.SessionUser;
 import com.herokuapp.bcsboot2.domain.posts.Posts;
-import com.herokuapp.bcsboot2.service.FileService;
-import com.herokuapp.bcsboot2.service.PostsService;
+import com.herokuapp.bcsboot2.service.posts.FileService;
+import com.herokuapp.bcsboot2.service.posts.PostsService;
 import com.herokuapp.bcsboot2.web.dto.FileDto;
 import com.herokuapp.bcsboot2.web.dto.PostsDto;
 
@@ -60,14 +61,14 @@ public class IndexController {
 	
 	//@GetMapping("/posts")//전체게시물 Read
 	@GetMapping("/")//접근 Api Url을 도메인 루트로 변경한다.
-	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model,@LoginUser SessionUser user) {
+	public String postList(@RequestParam(value="keyword", defaultValue="")String keyword,@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model,@LoginUser SessionUser user) {
 		
 		if(user!=null)
 		{
 			model.addAttribute("sessionUserName",user.getName());
 			model.addAttribute("sessionRoleName","ROLE_ADMIN".equals(user.getRole())?"admin":null);
 		}
-		Page<Posts> postsList = postsService.postsList(pageable);
+		Page<Posts> postsList = postsService.postsList(keyword,pageable);//오버로드 된 검색 키워드와 함께 매개변수로 넘겨서 작성한 검색 함수로 넘어간다.
 		model.addAttribute("postsList", postsList);//게시글목록 5개
 		model.addAttribute("currPage", postsList.getPageable().getPageNumber());//현재페이지번호
 		model.addAttribute("pageIndex", postsList.getTotalPages());//전체페이지개수

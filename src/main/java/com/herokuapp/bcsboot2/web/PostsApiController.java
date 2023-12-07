@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.herokuapp.bcsboot2.service.PostsService;
+import com.herokuapp.bcsboot2.service.posts.PostsService;
 import com.herokuapp.bcsboot2.web.dto.PostsDto;
 
 import lombok.RequiredArgsConstructor;

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.herokuapp.bcsboot2.service.FileService;
+import com.herokuapp.bcsboot2.service.posts.FileService;
 import com.herokuapp.bcsboot2.web.dto.FileDto;
 
 import lombok.RequiredArgsConstructor;

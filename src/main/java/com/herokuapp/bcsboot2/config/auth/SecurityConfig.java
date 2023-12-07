@@ -1,5 +1,8 @@
 package com.herokuapp.bcsboot2.config.auth;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,14 +13,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private DataSource dataSource;
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
+		auth.jdbcAuthentication()
+		.dataSource(dataSource)
+		.rolePrefix("ROLE_")//현재 테이블에 저장될 때 ADMIN, USER로 저장되기 때문에 생략된 부분 추가
+		.usersByUsernameQuery("select username, password, enabled from simple_users where username = ?")//로그인 인증 쿼리
+		.authoritiesByUsernameQuery("select username, role from simple_users where username = ?");//DB에서 권한 가져오는 쿼리
+		/*auth.inMemoryAuthentication()
 		.withUser("admin").password(passwordEncoder().encode("1234")).roles("ADMIN")
 		.and()
 		.withUser("user").password(passwordEncoder().encode("1234")).roles("USER")
 		.and()
-		.withUser("guest").password(passwordEncoder().encode("1234")).roles("GUEST");
+		.withUser("guest").password(passwordEncoder().encode("1234")).roles("GUEST");*/
 	}
 	
 	//PasswordEndoder 메소드(비번암호화) 필수
